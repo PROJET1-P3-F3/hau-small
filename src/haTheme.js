@@ -27,7 +27,7 @@ const palette = {
 export const mainTheme = createTheme({
   palette,
   typography: {
-    fontFamily: ['Quicksand', 'sans-serif'].join(','),
+    fontFamily: ['Ysabeau Infant', 'sans-serif'].join(','),
     fontSize: 15
   },
   // change the default Mui or Ra component style
