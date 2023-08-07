@@ -64,11 +64,12 @@ const HaLoginPage = () => {
           sx={{
             width: 'inherit',
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            
           }}
           position={'absolute'}
         >
-          <Login backgroundImage={null} style={{ backgroundImage: 'inherit', position: 'relative' }} />
+          <Login  backgroundImage={null} style={{ backgroundImage: 'inherit', position: 'relative' }} />
         </Grid>
         <Grid
           xs={displayFull ? 4 : 12}
@@ -80,7 +81,7 @@ const HaLoginPage = () => {
           }}
           position={'absolute'}
         >
-          <Link href='#/login' color='#FFFF' onClick={() => setOpenModal(true)} align='center'>
+          <Link href='#/login' color='#000000' variant='h7' style={{backgroundColor: 'rgba(255,255,255,0.9)', borderRadius: '6px', padding: '5px'}} onClick={() => setOpenModal(true)} align='center'>
             Mot de passe oublié?
           </Link>
         </Grid>
@@ -89,7 +90,6 @@ const HaLoginPage = () => {
   }
   const ResponsiveCompletePassword = () => <CompletePasswordPage style={{ backgroundImage: 'inherit' }} />
   const PasswordChangeableLogin = () => (authProvider.isTemporaryPassword() ? <ResponsiveCompletePassword /> : <ResponsiveLogin />)
-
   return (
     <div
       style={{
@@ -115,10 +115,10 @@ const HaLoginPage = () => {
         <Grid container spacing={2} style={{ paddingTop: '10%' }}>
           <Grid item xs={4}>
             <Typography variant='h3' align='center'>
-              <div style={{ color: '#ffc107' }}>HEI</div>
+              <div style={{ color: '#ffc107' , fontWeight: 'bold'}}>HEI</div>
             </Typography>
-            <Typography variant='h7' align='center'>
-              <div style={{ color: '#ffffff' }}>Une scolarité qui passe à l'échelle</div>
+            <Typography variant='h5' align='center'>
+              <div style={{ color: '#ffffff' , fontWeight: 'bold'}}>Une scolarité qui passe à l'échelle</div>
             </Typography>{' '}
             <PasswordChangeableLogin />
           </Grid>
