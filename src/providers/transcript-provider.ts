@@ -1,5 +1,6 @@
 import { StudentTranscriptClaim } from 'src/gen/haClient'
 import { transcriptApi } from './api'
+import { Transcript } from 'src/gen/haClient'
 
 const transcriptProvider = {
   //get all transcripts of student
@@ -8,9 +9,10 @@ const transcriptProvider = {
     return data
   },
   // Create new transcript or update existing transcript
-  /*async putTranscriptById (idStudent: string) {
-    const {data} = await transcriptApi().put
-  }*/
+  async putTranscriptById (idStudent: string, transcript: Transcript[]) {
+    const {data} = await transcriptApi().crudStudentTranscripts(idStudent,transcript)
+    return data;
+  },
   //get transcript by id
   async getTranscriptByIdStudent(idStudent: string, idTranscript: string) {
     const { data } = await transcriptApi().getStudentTranscriptById(idStudent, idTranscript)
@@ -32,11 +34,10 @@ const transcriptProvider = {
     return data
   },
   //submit transcript pdf file to latest transcript version
-  /*
-  async postTranscriptPdf (idStudent: string, idTranscript: string, body: File) {
-    const {data} = await transcriptApi().putStudentTranscript(idStudent,idTranscript,body)
+  async postTranscriptPdf(idStudent: string, idTranscript: string, body: File) {
+    const { data } = await transcriptApi().putStudentTranscriptVersionPdf(idStudent, idTranscript, body);
     return data;
-  },*/
+  },
   //get All Claims for a specific version of a student transcript
   async getAllClaims(idStudent: string, idTranscript: string, idVersion: string, idClaim: string) {
     const { data } = await transcriptApi().getStudentTranscriptClaims(idStudent, idTranscript, idVersion)
