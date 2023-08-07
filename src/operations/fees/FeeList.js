@@ -37,6 +37,7 @@ const FeeList = ({ studentId }) => {
       label='Frais'
       actions={role === WhoamiRoleEnum.Manager && <Actions basePath={`/students/${definedStudentId}/fees`} />}
       filterDefaultValues={{ studentId: definedStudentId }}
+      sx={{ marginTop: '1rem' }}
       pagination={false}
       perPage={maxPageSize}
     >

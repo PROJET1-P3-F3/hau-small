@@ -1,4 +1,4 @@
-import { Layout } from '@react-admin/ra-enterprise'
+import { Layout } from 'react-admin'
 import { AppLocationContext } from '@react-admin/ra-navigation'
 
 import HaAppBar from './HaAppBar'
