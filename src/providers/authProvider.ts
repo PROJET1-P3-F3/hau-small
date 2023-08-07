@@ -1,5 +1,4 @@
 import { getPermissions } from '../security/permissions'
-import { useNotify } from 'react-admin'
 
 import { ClientMetaData } from '@aws-amplify/auth/lib-esm/types'
 import { Amplify } from 'aws-amplify'

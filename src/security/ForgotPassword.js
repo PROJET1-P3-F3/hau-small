@@ -14,7 +14,7 @@ const ForgotPassword = ({ username, setOpenModal }) => {
   const handleConfirmPassword = e => setConfirmPassword(e.target.value)
   const handleCode = e => setCode(e.target.value)
 
-  const forgotPasswordSumbmit = () => {
+  const forgotPasswordSubmit = () => {
     authProvider
       .forgotPasswordSubmit(username, code, password)
       .then(() => {
@@ -24,8 +24,8 @@ const ForgotPassword = ({ username, setOpenModal }) => {
   }
 
   const handleSubmit = () => {
-    if (checkPassword(password, confirmPassword) == true) {
-      return forgotPasswordSumbmit()
+    if (checkPassword(password, confirmPassword) === true) {
+      return forgotPasswordSubmit()
     } else {
       notify(checkPassword(password, confirmPassword), { type: 'error', autoHideDuration: '10000' })
     }

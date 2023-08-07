@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { Create, SimpleForm, TextInput, RadioButtonGroupInput, useDataProvider, required, minValue, number } from 'react-admin'
+import { Create, SimpleForm, TextInput, RadioButtonGroupInput, useDataProvider, required } from 'react-admin'
 import { useParams } from 'react-router-dom'
 import { paymentTypes } from '../../conf'
 
