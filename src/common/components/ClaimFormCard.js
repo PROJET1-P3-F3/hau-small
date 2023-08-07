@@ -31,9 +31,9 @@ export const ClaimFormCard = ({ idTranscript, versionId, sendClaim }) => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            name='text'
-            label='Texte'
-            value={claim.text}
+            name="text"
+            label="Texte"
+            value={reason}
             fullWidth
             multiline
             rows={4}
