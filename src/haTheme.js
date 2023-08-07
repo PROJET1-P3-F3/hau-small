@@ -45,6 +45,18 @@ export const mainTheme = createTheme({
         }
       }
     },
+    CustomCard: {
+      styleOverrides: {
+        root: {
+          padding: '30px',
+          marginBottom: '50px',
+          border: '1px solid #ccc',
+          borderRadius: '8px',
+          boxShadow: '0px 3px 20px 1px rgba(0, 0, 0, 0.05)'
+        }
+      }
+    }
+  },
     RaLayout: {
       styleOverrides: {
         root: {
@@ -144,4 +156,4 @@ export const mainTheme = createTheme({
       }
     }
   }
-})
+)
