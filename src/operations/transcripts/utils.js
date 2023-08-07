@@ -13,5 +13,6 @@ export const TranscriptsListItems = () => {
       <CustomDateField source='creation_datetime' label='Date de création' showTime={false} />
       <ShowButton basePath='/transcripts' />
     </Datagrid>
+    
   )
 }
