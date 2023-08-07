@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material'
+import { defaultTheme } from 'react-admin'
 
 const palette = {
   background: {
@@ -23,15 +24,54 @@ const palette = {
     contrastText: 'rgba(0,0,0,0.7)'
   },
   dark: '#212529',
-  ligth: '#f8f9fa',
+  light: '#f8f9fa',
   beige: 'rgb(248,243,229)',
   hei: 'rgb(159,115,0)',
-  orangeLigth: 'rgb(222,196,125)',
+  orangeLight: 'rgb(222,196,125)',
   logo: 'rgb(223,164,8)'
+}
+
+const raActiveLinkStyle = {
+  background: palette.beige,
+  color: palette.hei,
+  '&:after': {
+    content: '""',
+    position: 'absolute',
+    top: '-20px',
+    left: '180px',
+    width: '40px',
+    height: '40px',
+    borderRadius: '0 0 15px 0',
+    background: 'transparent',
+    transform: 'translateY(-50%)',
+    boxShadow: '8px 4px rgb(248,243,229)',
+    zIndex: -1
+  },
+  '&:before': {
+    content: '""',
+    position: 'absolute',
+    bottom: '-60px',
+    left: '180px',
+    width: '40px',
+    height: '40px',
+    borderRadius: '0 15px 0 0',
+    background: 'transparent',
+    transform: 'translateY(-50%)',
+    boxShadow: '8px -4px rgb(248,243,229)',
+    zIndex: -1
+  },
+  '&:hover': {},
+  '& .MuiSvgIcon-root': {
+    color: palette.hei
+  }
 }
 
 export const mainTheme = createTheme({
   palette,
+  sidebar: {
+    width: 240,
+    closedWidth: 50
+  },
   typography: {
     fontFamily: ['Ysabeau Infant', 'sans-serif'].join(','),
     fontSize: 15
@@ -64,7 +104,7 @@ export const mainTheme = createTheme({
           border: 'none',
           boxShadow: 'none',
           '& .RaAppBar-toolbar': {
-            background: palette.orangeLigth,
+            background: palette.orangeLight,
             paddingBlock: '0.5rem',
             border: 'none',
             boxShadow: 'none'
@@ -84,7 +124,16 @@ export const mainTheme = createTheme({
       styleOverrides: {
         root: {
           marginTop: '20px',
-          '&.RaMenu-closed': {},
+          '&.RaMenu-open': {
+            marginLeft: '20px'
+          }
+        }
+      }
+    },
+    RaMultiLevelMenu: {
+      styleOverrides: {
+        root: {
+          marginTop: '20px',
           '&.RaMenu-open': {
             marginLeft: '20px'
           }
@@ -135,6 +184,25 @@ export const mainTheme = createTheme({
             }
           },
           '&.RaMenuItemLink-inactive': {
+            boxShadow: 'rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+          },
+          '& .MuiSvgIcon-root': {
+            color: palette.dark
+          }
+        }
+      }
+    },
+    RaMultiLevelMenuItemLink: {
+      styleOverrides: {
+        root: {
+          marginBottom: '0.4rem',
+          borderRadius: '50px 0px 0px 50px',
+          fontWeight: '600',
+          paddingBlock: '0.7rem',
+          color: palette.dark,
+          position: 'relative',
+          '&.RaMultiLevelMenuItemLink-active': raActiveLinkStyle,
+          '&.RaMultiLevelMenuItemLink-inactive': {
             boxShadow: 'rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
           },
           '& .MuiSvgIcon-root': {

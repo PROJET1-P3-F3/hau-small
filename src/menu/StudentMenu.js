@@ -1,10 +1,9 @@
-import { MultiLevelMenu, MenuItemCategory } from '@react-admin/ra-navigation'
 import { Menu } from 'react-admin'
 import { Receipt, AttachMoney, AccountCircle } from '@mui/icons-material'
 
 import authProvider from '../providers/authProvider'
 
-export const StudentMenu = (props) => {
+export const StudentMenu = props => {
   // const notify = useNotify()
   // const notifyNotImplemented = () => notify('En cours de développement. Ce qui présage quelques exercices pour vous 😉', { type: 'warning' })
   const whoamiId = authProvider.getCachedWhoami().id
