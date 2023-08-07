@@ -1,11 +1,7 @@
-import { EmailField, FunctionField, SimpleShowLayout, Show, TextField } from 'react-admin'
-import { Link } from '@mui/material'
+import { SimpleShowLayout, Show} from 'react-admin'
 import authProvider from '../../providers/authProvider'
-import { unexpectedValue, CustomDateField } from '../utils'
 
 export const TranscriptLayout = () => {
-  
-
   
   return (
     <SimpleShowLayout>
