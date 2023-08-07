@@ -1,6 +1,7 @@
 import { Datagrid, FunctionField, ShowButton } from 'react-admin'
 import { prettyPrintMoney, CustomDateField, commentFunctionRenderer } from '../utils'
 import rowStyle from './byStatusRowStyle'
+import RenderIsPaid from '../../common/utils/RenderIsPaid'
 
 export const FeesListItems = () => {
   return (
@@ -9,6 +10,7 @@ export const FeesListItems = () => {
       <FunctionField source='comment' render={commentFunctionRenderer} label='Commentaire' />
       <FunctionField label='Reste à payer' render={record => prettyPrintMoney(record.remaining_amount)} textAlign='right' />
       <CustomDateField source='creation_datetime' label='Date de création' showTime={false} />
+      <FunctionField label='Reste à payer' render={RenderIsPaid} textAlign='right' />
       <ShowButton basePath='/fees' />
     </Datagrid>
   )
