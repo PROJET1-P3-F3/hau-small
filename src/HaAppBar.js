@@ -20,7 +20,7 @@ const UserMenu = () => {
 const HaAppBar = props => {
   return (
     <DefaultAppBar {...props} elevation={1} sx={{ bgcolor: '#ffbf00', color: 'black' }} userMenu={<UserMenu {...props} color='transparent' />}>
-      <Typography variant='h6' color='inherit' className={AppBarClasses.title} id='react-admin-title' />
+      <Typography variant='h6' color='inherit' sx={{ flexGrow: '2' }} className={AppBarClasses.title} id='react-admin-title' />
       {props.children}
     </DefaultAppBar>
   )
