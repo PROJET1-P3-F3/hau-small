@@ -22,6 +22,7 @@ import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
 import { mainTheme } from './haTheme'
 import { grades } from './operations/grades'
+import transcripts from './operations/transcripts'
 
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
 const App = () => (
@@ -37,6 +38,7 @@ const App = () => (
   >
     <Resource name='profile' />
     <Resource name='grades' />
+    <Resource name='transcripts' {...transcripts}/>
     <Resource name='students' {...students} />
     <Resource name='teachers' {...teachers} />
 

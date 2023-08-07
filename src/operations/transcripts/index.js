@@ -1,14 +1,12 @@
-import ProfileShow from './ProfileShow'
-import { TextInput } from 'react-admin'
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
+import TranscriptList from './TranscriptList'
+import TranscriptShow from './TranscriptShow'
 
-const profile = {
-  show: ProfileShow
+const transcripts = {
+  list: TranscriptList,
+  show: TranscriptShow,
+  icon: PictureAsPdfIcon,
+  options: { label: 'Transcriptions' }
 }
 
-export default profile
-
-export const profileFilters = [
-  <TextInput source='first_name' label='Filtre par prénom·s' alwaysOn />,
-  <TextInput source='last_name' label='Nom·s' />,
-  <TextInput source='ref' label='Référence' />
-]
+export default transcripts
