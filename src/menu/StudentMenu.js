@@ -1,5 +1,5 @@
 import { Menu } from 'react-admin'
-import { Receipt, AttachMoney, AccountCircle } from '@mui/icons-material'
+import { Receipt, AttachMoney, AccountCircle, PictureAsPdf } from '@mui/icons-material'
 
 import authProvider from '../providers/authProvider'
 
@@ -12,6 +12,12 @@ export const StudentMenu = props => {
       <Menu.Item to='/profile' name='profile' primaryText='Mon profil' leftIcon={<AccountCircle />} />
       <Menu.Item to={whoamiId ? `/students/${authProvider.getCachedWhoami().id}/fees` : '/'} name='fees' primaryText='Frais' leftIcon={<AttachMoney />} />
       <Menu.Item to='/grades' name='student-grades' primaryText='Notes' leftIcon={<Receipt />} />
+      <Menu.Item
+        to={whoamiId ? `/students/${authProvider.getCachedWhoami().id}/transcriptions` : '/'}
+        name='student-transcripts'
+        primaryText='Relevés de note'
+        leftIcon={<PictureAsPdf />}
+      />
     </Menu>
   )
 }

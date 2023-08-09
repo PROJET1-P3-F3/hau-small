@@ -3,7 +3,7 @@ import { defaultTheme } from 'react-admin'
 
 const palette = {
   background: {
-    default: 'rgb(248,243,229)'
+    default: 'rgba(248,243,229, 50)'
   },
   primary: {
     main: '#ca8a04',
@@ -31,46 +31,12 @@ const palette = {
   logo: 'rgb(223,164,8)'
 }
 
-const raActiveLinkStyle = {
-  background: palette.beige,
-  color: palette.hei,
-  '&:after': {
-    content: '""',
-    position: 'absolute',
-    top: '-20px',
-    left: '180px',
-    width: '40px',
-    height: '40px',
-    borderRadius: '0 0 15px 0',
-    background: 'transparent',
-    transform: 'translateY(-50%)',
-    boxShadow: '8px 4px rgb(248,243,229)',
-    zIndex: -1
-  },
-  '&:before': {
-    content: '""',
-    position: 'absolute',
-    bottom: '-60px',
-    left: '180px',
-    width: '40px',
-    height: '40px',
-    borderRadius: '0 15px 0 0',
-    background: 'transparent',
-    transform: 'translateY(-50%)',
-    boxShadow: '8px -4px rgb(248,243,229)',
-    zIndex: -1
-  },
-  '&:hover': {},
-  '& .MuiSvgIcon-root': {
-    color: palette.hei
-  }
-}
-
 export const mainTheme = createTheme({
+  ...defaultTheme,
   palette,
   sidebar: {
-    width: 240,
-    closedWidth: 50
+    width: 250,
+    closedWidth: 70
   },
   typography: {
     fontFamily: ['Ysabeau Infant', 'sans-serif'].join(','),
@@ -120,94 +86,23 @@ export const mainTheme = createTheme({
         }
       }
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          '& .MuiButtonBase-root': {
+            padding: '0.5rem'
+          },
+          '& .RaMenuItem-link': {
+            padding: '0px',
+            margin: '0px'
+          }
+        }
+      }
+    },
     RaMenu: {
       styleOverrides: {
         root: {
-          marginTop: '20px',
-          '&.RaMenu-open': {
-            marginLeft: '20px'
-          }
-        }
-      }
-    },
-    RaMultiLevelMenu: {
-      styleOverrides: {
-        root: {
-          marginTop: '20px',
-          '&.RaMenu-open': {
-            marginLeft: '20px'
-          }
-        }
-      }
-    },
-    RaMenuItemLink: {
-      styleOverrides: {
-        root: {
-          marginBottom: '0.4rem',
-          borderRadius: '50px 0px 0px 50px',
-          fontWeight: '600',
-          paddingBlock: '0.7rem',
-          color: palette.dark,
-          position: 'relative',
-          '&.RaMenuItemLink-active': {
-            background: palette.beige,
-            color: palette.hei,
-            '&:after': {
-              content: '""',
-              position: 'absolute',
-              top: '-20px',
-              left: '180px',
-              width: '40px',
-              height: '40px',
-              borderRadius: '0 0 15px 0',
-              background: 'transparent',
-              transform: 'translateY(-50%)',
-              boxShadow: '8px 4px rgb(248,243,229)',
-              zIndex: -1
-            },
-            '&:before': {
-              content: '""',
-              position: 'absolute',
-              bottom: '-60px',
-              left: '180px',
-              width: '40px',
-              height: '40px',
-              borderRadius: '0 15px 0 0',
-              background: 'transparent',
-              transform: 'translateY(-50%)',
-              boxShadow: '8px -4px rgb(248,243,229)',
-              zIndex: -1
-            },
-            '&:hover': {},
-            '& .MuiSvgIcon-root': {
-              color: palette.hei
-            }
-          },
-          '&.RaMenuItemLink-inactive': {
-            boxShadow: 'rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
-          },
-          '& .MuiSvgIcon-root': {
-            color: palette.dark
-          }
-        }
-      }
-    },
-    RaMultiLevelMenuItemLink: {
-      styleOverrides: {
-        root: {
-          marginBottom: '0.4rem',
-          borderRadius: '50px 0px 0px 50px',
-          fontWeight: '600',
-          paddingBlock: '0.7rem',
-          color: palette.dark,
-          position: 'relative',
-          '&.RaMultiLevelMenuItemLink-active': raActiveLinkStyle,
-          '&.RaMultiLevelMenuItemLink-inactive': {
-            boxShadow: 'rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
-          },
-          '& .MuiSvgIcon-root': {
-            color: palette.dark
-          }
+          marginTop: '20px'
         }
       }
     }

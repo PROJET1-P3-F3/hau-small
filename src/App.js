@@ -1,5 +1,5 @@
-import React from 'react'
-import { Admin, CustomRoutes, Resource } from 'react-admin'
+import React, { Suspense } from 'react'
+import { CustomRoutes, Resource } from 'react-admin'
 
 import { Route } from 'react-router-dom'
 
@@ -22,6 +22,8 @@ import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
 import { mainTheme } from './haTheme'
 import { grades } from './operations/grades'
+import { Admin } from '@react-admin/ra-enterprise'
+import transcripts from './operations/transcripts'
 
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
 const App = () => (
@@ -37,6 +39,7 @@ const App = () => (
   >
     <Resource name='profile' />
     <Resource name='grades' />
+    <Resource name='transcripts' />
     <Resource name='students' {...students} />
     <Resource name='teachers' {...teachers} />
 
@@ -46,17 +49,24 @@ const App = () => (
     <Resource name='student-grades' {...studentGrades} />
 
     <CustomRoutes>
-      <Route exact path='/profile' element={<profile.show />} />
+      {/* transcript */}
+      <Route path='/students/:studentId/transcriptions/:transcriptId/show' element={<transcripts.show />} />
+      <Route path='/students/:studentId/transcriptions/:transcriptId/edit' element={<transcripts.edit />} />
+      <Route path='/students/:studentId/transcriptions' element={<transcripts.list />} />
+      <Route path='/students/:studentId/transcriptions/create' element={<transcripts.create />} />
+      {/* transcript */}
+
+      <Route path='/profile' element={<profile.show />} />
       <Route path='/grades' element={<grades.show />} />
 
-      <Route exact path='/students/:studentId/fees' element={<fees.list />} />
+      <Route path='/students/:studentId/fees' element={<fees.list />} />
+
       <Route
-        exact
         path='/students/:studentId/fees/create'
         element={
-          <React.Suspense fallback='Veuillez patienter...'>
+          <Suspense fallback='Veuillez patienter...'>
             <FeeCreate />
-          </React.Suspense>
+          </Suspense>
         }
       />
       <Route exact path='/fees/:feeId/show' element={<fees.show />} />

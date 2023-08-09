@@ -1,8 +1,5 @@
-import React, { useState } from 'react'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardHeader from '@mui/material/CardHeader'
-import Typography from '@mui/material/Typography'
+import React from 'react'
+import { Typography, Card, CardContent, CardHeader, TextField, Button } from '@mui/material'
 import { useForm } from 'react-hook-form'
 
 export const ClaimFormCard = ({ idTranscript, versionId, sendClaim }) => {
@@ -30,17 +27,7 @@ export const ClaimFormCard = ({ idTranscript, versionId, sendClaim }) => {
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            name='text'
-            label='Texte'
-            value={claim.text}
-            fullWidth
-            multiline
-            rows={4}
-            margin='normal'
-            {...register('text', { required: true })}
-            required
-          />
+          <TextField name='text' label='Texte' fullWidth multiline rows={4} margin='normal' {...register('text', { required: true })} required />
           <Button type='submit' variant='contained' color='primary'>
             Envoyer
           </Button>
