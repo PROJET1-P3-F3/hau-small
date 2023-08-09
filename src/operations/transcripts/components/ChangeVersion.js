@@ -17,6 +17,7 @@ export const SelectTranscriptVersion = ({ idStudent, idTranscript, onChange, sel
 
   return (
     <Autocomplete
+      clearIcon={false}
       sx={{ minWidth: 240 }}
       onChange={handleChange}
       options={versions}

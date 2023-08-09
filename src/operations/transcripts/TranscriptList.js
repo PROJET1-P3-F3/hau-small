@@ -8,6 +8,7 @@ import authProvider from '../../providers/authProvider'
 
 import { WhoamiRoleEnum } from '../../gen/haClient'
 import { TranscriptDatagrid } from './utils'
+import { PrevNextPagination } from '../utils/PrevNextPagination'
 
 const Actions = ({ basePath, resource }) => (
   <TopToolbar disableGutters>
@@ -27,7 +28,7 @@ const TranscriptList = ({ studentId }) => {
       actions={role === WhoamiRoleEnum.Manager && <Actions basePath={`/students/${definedStudentId}/transcripts`} />}
       filterDefaultValues={{ studentId: definedStudentId }}
       sx={{ marginTop: '1rem' }}
-      pagination={false}
+      pagination={<PrevNextPagination />}
       perPage={maxPageSize}
     >
       <TranscriptDatagrid studentId={definedStudentId} />

@@ -1,5 +1,5 @@
 export type HaDataProviderType = {
   getList: (page: number, perPage: number, filter: any) => Promise<Array<any>>
-  getOne: (id: string) => Promise<any>
-  saveOrUpdate: (resources: any) => Promise<any>
+  getOne: (id: string, options?: Record<string, any>) => Promise<any>
+  saveOrUpdate: (resources: any, options?: Record<string, any>) => Promise<any>
 }

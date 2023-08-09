@@ -6,7 +6,7 @@ import feeProvider from './feeProvider'
 import paymentProvider from './paymentProvider'
 import teacherProvider from './teacherProvider'
 import gradeProvider from './grades-provider'
-import haTranscriptProvider from './transcript-provider'
+import haTranscriptProvider, { transcriptClaimProvider, transcriptVersionProvider } from './transcript-provider'
 
 export const maxPageSize = 500
 
@@ -17,7 +17,9 @@ const getProvider = (resourceType: string): HaDataProviderType => {
   if (resourceType === 'payments') return paymentProvider
   if (resourceType === 'teachers') return teacherProvider
   if (resourceType === 'grades') return gradeProvider
-  if (resourceType === 'transcripts') return haTranscriptProvider as any
+  if (resourceType === 'transcripts') return haTranscriptProvider
+  if (resourceType === 'transcriptsVersion') return transcriptVersionProvider
+  if (resourceType === 'transcriptsClaim') return transcriptClaimProvider
   throw new Error('Unexpected resourceType: ' + resourceType)
 }
 
@@ -36,16 +38,17 @@ const dataProvider: RaDataProviderType = {
     return { data: result, total: Number.MAX_SAFE_INTEGER }
   },
   async getOne(resourceType: string, params: any) {
-    const result = await getProvider(resourceType).getOne(params.id)
+    const result = await getProvider(resourceType).getOne(params.id, params.options)
     return { data: result }
   },
   async update(resourceType: string, params: any) {
-    const result = await getProvider(resourceType).saveOrUpdate([params.data])
+    const result = await getProvider(resourceType).saveOrUpdate([params.data], params.options)
     return { data: result[0] }
   },
   async create(resourceType: string, params: any) {
     const result = await getProvider(resourceType).saveOrUpdate(
-      resourceType === 'students' || resourceType === 'teachers' ? toEnabledUsers([params.data]) : [params.data]
+      resourceType === 'students' || resourceType === 'teachers' ? toEnabledUsers([params.data]) : [params.data],
+      params.options
     )
     return { data: result[0] }
   }

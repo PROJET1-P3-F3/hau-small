@@ -1,5 +1,13 @@
 import { transcriptApi } from './api'
 import { HaDataProviderType } from './HaDataProviderType'
+import { v4 as uuidV4Generator } from 'uuid'
+
+const generateId = (object: { id: string } & Record<string, any>) => {
+  if (!object.id) {
+    return { ...object, id: uuidV4Generator() }
+  }
+  return { ...object }
+}
 
 const haTranscriptProvider: HaDataProviderType = {
   //get all transcripts of student
@@ -20,6 +28,52 @@ export const transcriptProvider = {
   },
   async getVersions(studentId: string, transcriptId: string) {
     const { data } = await transcriptApi().getTranscriptsVersions(studentId, transcriptId)
+    return data
+  },
+  async getClaims(studentId: string, transcriptId: string, versionId: string, filter: any = {}) {
+    const {
+      pagination: { page, perPage }
+    } = filter
+    const { data } = await transcriptApi().getStudentTranscriptClaims(studentId, transcriptId, versionId, page, perPage)
+    return data
+  }
+}
+
+export const transcriptVersionProvider: HaDataProviderType = {
+  async getList(page: number, perPage: number, filter = {}) {
+    const { studentId, transcriptId } = filter
+    const { data } = await transcriptApi().getTranscriptsVersions(studentId, transcriptId, page, perPage)
+    return data
+  },
+  async getOne(versionId: string, options = {}) {
+    const { studentId, transcriptId } = options
+    const { data } = await transcriptApi().getStudentTranscriptVersionPdf(studentId, transcriptId, versionId)
+    return data
+  },
+  async saveOrUpdate(_resources: any, options = {}) {
+    const { studentId, transcriptId } = options
+    const resources = { ..._resources, id: uuidV4Generator() }
+
+    const { data } = await transcriptApi().putStudentTranscriptVersionPdf(studentId, transcriptId, resources)
+    return data
+  }
+}
+
+export const transcriptClaimProvider: HaDataProviderType = {
+  async getList(page: number, perPage: number, filter: any = {}) {
+    const { studentId, transcriptId, versionId } = filter
+    const { data } = await transcriptApi().getStudentTranscriptClaims(studentId, transcriptId, versionId, page, perPage)
+    return data
+  },
+  async getOne(claimId, options = {}) {
+    const { studentId, transcriptId, versionId } = options
+    const { data } = await transcriptApi().getStudentClaimOfTranscriptVersion(studentId, transcriptId, versionId, claimId)
+    return data
+  },
+  async saveOrUpdate(_resources, options = {}) {
+    const { studentId, transcriptId, versionId, claimId } = options
+    const resources = generateId(_resources || {})
+    const { data } = await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, transcriptId, versionId, claimId, resources)
     return data
   }
 }
