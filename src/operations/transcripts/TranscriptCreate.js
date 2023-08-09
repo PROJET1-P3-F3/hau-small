@@ -5,7 +5,7 @@ import {
   SimpleForm,
   TextInput,
   useDataProvider,
-  required // Ajout de l'import ici
+  required
 } from 'react-admin'
 import { useParams } from 'react-router-dom'
 
