@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import {
   BooleanInput,
-  Create,
+  Edit,
   SimpleForm,
   TextInput,
   useDataProvider,
-  required
+  required // Ajout de l'import ici
 } from 'react-admin'
 import { useParams } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ export const TranscriptCreate = props => {
   }, [studentId, dataProvider])
 
   return (
-    <Create
+    <Edit
       {...props}
       title={`Transcript de ${studentRef}`}
       resource='transcripts'
@@ -35,7 +35,7 @@ export const TranscriptCreate = props => {
         <TextInput source='academic_year' name='academic_year' label='Année académique' fullWidth={true} validate={required()} />
         <BooleanInput source='is_definitive' label='Définitif ?' name='is_definitive' defaultValue={true} />
       </SimpleForm>
-    </Create>
+    </Edit>
   )
 }
 
