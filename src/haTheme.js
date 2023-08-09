@@ -1,14 +1,23 @@
 import { createTheme } from '@mui/material'
 import { defaultTheme } from 'react-admin'
 
+export const BUTTON = {
+  minWidth: '5rem',
+  paddingBlock: '0.7rem',
+  paddingInline: '1.2rem',
+  textTransform: 'capitalize',
+  borderRadius: '5rem',
+  margin: '0.2rem'
+}
+
 const palette = {
   background: {
     default: 'rgba(248,243,229, 50)'
   },
   primary: {
-    main: '#ca8a04',
-    light: '#fef08a',
-    dark: '#a16207',
+    main: 'rgb(217, 162, 80)',
+    light: 'rgb(222,196,125)',
+    dark: 'rgb(224, 142, 18)',
     contrastText: '#ffffff'
   },
   secondary: {
@@ -70,7 +79,7 @@ export const mainTheme = createTheme({
           border: 'none',
           boxShadow: 'none',
           '& .RaAppBar-toolbar': {
-            background: palette.orangeLight,
+            background: palette.primary.main,
             paddingBlock: '0.5rem',
             border: 'none',
             boxShadow: 'none'
@@ -97,6 +106,43 @@ export const mainTheme = createTheme({
             margin: '0px'
           }
         }
+      }
+    },
+    MuiButton: {
+      variants: [
+        {
+          props: { color: 'primary' },
+          style: {
+            background: palette.primary.main,
+            color: palette.primary.contrastText,
+            '&:hover': {
+              background: palette.primary.dark
+            }
+          }
+        },
+        {
+          props: { disabled: true },
+          style: {
+            background: palette.neutral.main,
+            color: palette.neutral.contrastText,
+            '&:hover': {
+              background: palette.neutral.main
+            }
+          }
+        },
+        {
+          props: { color: 'secondary' },
+          style: {
+            background: palette.secondary.main,
+            color: palette.secondary.contrastText,
+            '&:hover': {
+              background: palette.secondary.dark
+            }
+          }
+        }
+      ],
+      styleOverrides: {
+        root: BUTTON
       }
     },
     RaMenu: {
