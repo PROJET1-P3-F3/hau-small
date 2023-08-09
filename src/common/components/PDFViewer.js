@@ -1,16 +1,29 @@
-import { Document, Page } from 'react-pdf'
-import useWindowSize from '../hooks'
+import 'react-pdf/dist/Page/AnnotationLayer.css'
+import 'react-pdf/dist/Page/TextLayer.css'
 
-export const PDFViewer = ({ pdfByteArray }) => {
+import { makeStyles } from '@mui/styles'
+import { Document, Page, pdfjs } from 'react-pdf'
+import { useWindowSize } from '../hooks'
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.js', import.meta.url).toString()
+
+const useStyle = makeStyles({
+  document: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '70vh'
+  }
+})
+
+export const PDFViewer = ({ pdf }) => {
   const windowSize = useWindowSize()
+  const { document } = useStyle()
   const pdfWidth = Math.floor(windowSize.width * (2 / 3))
-  const pdfHeight = Math.floor(windowSize.height * (2 / 3))
 
   return (
-    <div>
-      <Document file={pdfByteArray}>
-        <Page width={pdfWidth} height={pdfHeight} pageNumber={1} />
-      </Document>
-    </div>
+    <Document file={pdf} className={document}>
+      <Page width={pdfWidth} pageNumber={1} />
+    </Document>
   )
 }

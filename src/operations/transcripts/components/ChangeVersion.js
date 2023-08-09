@@ -17,12 +17,13 @@ export const SelectTranscriptVersion = ({ idStudent, idTranscript, onChange, sel
 
   return (
     <Autocomplete
+      sx={{ minWidth: 240 }}
       onChange={handleChange}
       options={versions}
+      value={selected}
       getOptionLabel={e => e.ref}
-      renderInput={params => <TextField {...params} />}
+      renderInput={params => <TextField label='Version' {...params} />}
       loading={isLoading}
-      label='Version'
     />
   )
 }

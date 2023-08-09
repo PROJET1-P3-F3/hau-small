@@ -1,26 +1,29 @@
-import { SimpleShowLayout } from 'react-admin'
-import { Card, CardHeader, Toolbar } from '@mui/material'
+import { Card, CardHeader, Toolbar, CardContent } from '@mui/material'
 
 import { useParams } from 'react-router-dom'
 import { SelectTranscriptVersion } from './components/ChangeVersion'
+import { useState } from 'react'
+import { PDFViewer } from '../../common/components/PDFViewer'
 
-export const TranscriptLayout = ({ transcriptId }) => {
-  return <SimpleShowLayout>this is</SimpleShowLayout>
-}
-
-const TranscriptAction = () => {
+const TranscriptAction = ({ onChange, selected }) => {
   const { transcriptId, studentId } = useParams()
+
   return (
     <Toolbar>
-      <SelectTranscriptVersion idStudent={studentId} idTranscript={transcriptId} onChange={e => console.log(e)} />
+      <SelectTranscriptVersion selected={selected} idStudent={studentId} idTranscript={transcriptId} onChange={onChange} />
     </Toolbar>
   )
 }
 
 const TranscriptShow = () => {
+  const [version, setVersion] = useState(null)
+
   return (
-    <Card sx={{ marginTop: '1rem' }}>
-      <CardHeader title='Relevé de note' action={<TranscriptAction />} />
+    <Card sx={{ marginTop: '1rem', minHeight: '80vh' }}>
+      <CardHeader title='Relevé de note' action={<TranscriptAction onChange={setVersion} selected={version} />} />
+      <CardContent>
+        <PDFViewer pdf={version?.pdf} />
+      </CardContent>
     </Card>
   )
 }
