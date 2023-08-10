@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { TextField, Button } from '@mui/material'
 import { transcriptClaimProvider } from '../../../providers/transcript-provider'
 import { useParams } from 'react-router-dom'
+import { v4 as uuidV4Generator } from "uuid"
 
 const getIdFromClaim = (claim = {}) => ({
   transcriptId: claim.transcript_id,
@@ -21,6 +22,12 @@ export const ClaimForm = ({ claim = {}, onSubmit }) => {
   const fetch = async data => {
     try {
       setLoading(true)
+      if(!claim.creation_datetime){
+        claim.creation_datetime = new Date().toISOString()
+      }
+      if(!claim.id){
+        claim.id = uuidV4Generator()
+      }
       await transcriptClaimProvider.saveOrUpdate({ ...claim, ...data }, {
         ...getIdFromClaim(claim),
         studentId: params?.studentId
@@ -45,7 +52,7 @@ export const ClaimForm = ({ claim = {}, onSubmit }) => {
                    sx={{ minWidth: '10rem' }}
         />
         <Button type='submit' sx={{maxWidth: "150px", alignSelf: "flex-end", marginTop: 2}} disabled={isLoading}>
-          Modifier
+          Enregistrer
         </Button>
       </form>
     </FormProvider>

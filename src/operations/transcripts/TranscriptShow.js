@@ -29,6 +29,8 @@ import { BUTTON } from '../../haTheme'
 import { Edit as EditIcon } from '@mui/icons-material'
 import { ClaimForm } from './components/ClaimForm'
 
+
+
 const ClaimStatus = ({ status }) => {
   return <Chip color={status === 'OPEN' ? 'success' : 'danger'} label={status} />
 }
@@ -46,7 +48,7 @@ const ClaimItem = ({ claim = {} }) => {
       <Box sx={{ textAlign: 'end' }}>
         <Typography sx={{ marginBottom: 2 }}>{formatDate(creation_datetime)}</Typography>
         {status === 'OPEN' &&
-          <ClaimDialog content={(handleClose) => <ClaimForm onSubmit={handleClose} claim={claim} />} openButton={
+          <ClaimDialog title="Modification" content={(handleClose) => <ClaimForm onSubmit={handleClose} claim={claim} />} openButton={
             <Tooltip title='Modifier'>
               <IconButton size='small'>
                 <EditIcon />
@@ -75,6 +77,16 @@ const TranscriptShow = () => {
     }
   }, [version, refetch, studentId, transcriptId])
 
+  const voidClaim = {
+    'id': '',
+    'transcript_id': transcriptId,
+    'transcript_version_id': version?.id,
+    'status': 'OPEN',
+    'creation_datetime': null,
+    'closed_datetime': null,
+    'reason': ''
+  }
+
   return (
     <Card sx={SHOW_CARD_CONTAINER}>
       <CardHeader
@@ -94,7 +106,8 @@ const TranscriptShow = () => {
             <Box sx={ASIDE}>{claimList && claimList.length > 0 && claimList.map(claim => <ClaimItem claim={claim}
                                                                                                     key={claim.id} />)}</Box>
             <Box sx={ASIDE_ACTIONS}>
-              <Button sx={BUTTON}>Faire une réclamation</Button>
+              <ClaimDialog title="Faire une réclamation" content={(handleClose) => <ClaimForm onSubmit={handleClose} claim={voidClaim} />} openButton={
+                <Button sx={BUTTON}>Faire une réclamation</Button>} />
             </Box>
           </Paper>
         </Box>

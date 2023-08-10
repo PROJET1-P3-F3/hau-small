@@ -5,7 +5,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
-export const ClaimDialog = ({ openButton, content }) => {
+export const ClaimDialog = ({ openButton, content, title }) => {
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -20,7 +20,7 @@ export const ClaimDialog = ({ openButton, content }) => {
     <Box>
       {cloneElement(openButton, { onClick: handleClickOpen })}
       <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose}>
-        <DialogTitle>Modification</DialogTitle>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent sx={{ minWidth: '400px' }}>
           {content(handleClose)}
         </DialogContent>
