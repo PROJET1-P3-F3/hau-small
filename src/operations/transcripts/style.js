@@ -33,7 +33,7 @@ export const ASIDE_TITLE = {
 
 export const ASIDE_ACTIONS = {
   paddingInline: '1rem',
-  paddingTop: "2rem"
+  paddingTop: '2rem'
 }
 
 export const CLAIM_ITEM = {

@@ -38,11 +38,11 @@ const dataProvider: RaDataProviderType = {
     return { data: result, total: Number.MAX_SAFE_INTEGER }
   },
   async getOne(resourceType: string, params: any) {
-    const result = await getProvider(resourceType).getOne(params.id, params.options)
+    const result = await getProvider(resourceType).getOne(params.id, { ...params.options, ...params.meta })
     return { data: result }
   },
   async update(resourceType: string, params: any) {
-    const result = await getProvider(resourceType).saveOrUpdate([params.data], params.options)
+    const result = await getProvider(resourceType).saveOrUpdate([params.data], { ...params.options, ...params.meta })
     return { data: result[0] }
   },
   async create(resourceType: string, params: any) {

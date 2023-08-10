@@ -16,14 +16,14 @@ const haTranscriptProvider: HaDataProviderType = {
     const { data } = await transcriptApi().getStudentTranscripts(filter.studentId, page, pageSize)
     return data
   },
-  async getOne(transcriptId: string, options={}): Promise<any> {
-    const {studentId} = options
-    const {data} = await transcriptApi().getStudentTranscriptById(studentId, transcriptId)
+  async getOne(transcriptId: string, options = {}): Promise<any> {
+    const { studentId } = options
+    const { data } = await transcriptApi().getStudentTranscriptById(studentId, transcriptId)
     return data
   },
-  async saveOrUpdate (resources: Transcript[]): Promise<any> {
+  async saveOrUpdate(resources: Transcript[]): Promise<any> {
     console.log(resources)
-    const {data} = await transcriptApi().crudStudentTranscripts(resources[0]?.student_id || "", resources)
+    const { data } = await transcriptApi().crudStudentTranscripts(resources[0]?.student_id || '', resources)
     return data
   }
 }

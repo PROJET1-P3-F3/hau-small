@@ -1,35 +1,13 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Chip,
-  IconButton,
-  Paper,
-  Toolbar,
-  Tooltip,
-  Typography
-} from '@mui/material'
+import { Box, Button, Card, CardContent, CardHeader, Chip, IconButton, Paper, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PDFViewer } from '../../common/components'
 import { ClaimDialog, SelectTranscriptVersion } from './components'
-import {
-  ASIDE,
-  ASIDE_ACTIONS,
-  ASIDE_CONTAINER,
-  ASIDE_TITLE,
-  CLAIM_ITEM,
-  SHOW_CARD_CONTAINER,
-  SHOW_CONTAINER
-} from './style'
+import { ASIDE, ASIDE_ACTIONS, ASIDE_CONTAINER, ASIDE_TITLE, CLAIM_ITEM, SHOW_CARD_CONTAINER, SHOW_CONTAINER } from './style'
 import { useGetList } from 'react-admin'
 import { BUTTON } from '../../haTheme'
 import { Edit as EditIcon } from '@mui/icons-material'
 import { ClaimForm } from './components/ClaimForm'
-
-
 
 const ClaimStatus = ({ status }) => {
   return <Chip color={status === 'OPEN' ? 'success' : 'danger'} label={status} />
@@ -47,13 +25,19 @@ const ClaimItem = ({ claim = {} }) => {
       </Box>
       <Box sx={{ textAlign: 'end' }}>
         <Typography sx={{ marginBottom: 2 }}>{formatDate(creation_datetime)}</Typography>
-        {status === 'OPEN' &&
-          <ClaimDialog title="Modification" content={(handleClose) => <ClaimForm onSubmit={handleClose} claim={claim} />} openButton={
-            <Tooltip title='Modifier'>
-              <IconButton size='small'>
-                <EditIcon />
-              </IconButton>
-            </Tooltip>} />}
+        {status === 'OPEN' && (
+          <ClaimDialog
+            title='Modification'
+            content={handleClose => <ClaimForm onSubmit={handleClose} claim={claim} />}
+            openButton={
+              <Tooltip title='Modifier'>
+                <IconButton size='small'>
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+            }
+          />
+        )}
       </Box>
     </Box>
   )
@@ -78,13 +62,13 @@ const TranscriptShow = () => {
   }, [version, refetch, studentId, transcriptId])
 
   const voidClaim = {
-    'id': '',
-    'transcript_id': transcriptId,
-    'transcript_version_id': version?.id,
-    'status': 'OPEN',
-    'creation_datetime': null,
-    'closed_datetime': null,
-    'reason': ''
+    id: '',
+    transcript_id: transcriptId,
+    transcript_version_id: version?.id,
+    status: 'OPEN',
+    creation_datetime: null,
+    closed_datetime: null,
+    reason: ''
   }
 
   return (
@@ -93,8 +77,7 @@ const TranscriptShow = () => {
         title='Relevé de note'
         action={
           <Toolbar>
-            <SelectTranscriptVersion selected={version} idStudent={studentId} idTranscript={transcriptId}
-                                     onChange={setVersion} />
+            <SelectTranscriptVersion selected={version} idStudent={studentId} idTranscript={transcriptId} onChange={setVersion} />
           </Toolbar>
         }
       />
@@ -103,11 +86,13 @@ const TranscriptShow = () => {
           <PDFViewer pdf={version?.pdf} />
           <Paper elevation={1} sx={ASIDE_CONTAINER}>
             <Typography sx={ASIDE_TITLE}>Réclamations</Typography>
-            <Box sx={ASIDE}>{claimList && claimList.length > 0 && claimList.map(claim => <ClaimItem claim={claim}
-                                                                                                    key={claim.id} />)}</Box>
+            <Box sx={ASIDE}>{claimList && claimList.length > 0 && claimList.map(claim => <ClaimItem claim={claim} key={claim.id} />)}</Box>
             <Box sx={ASIDE_ACTIONS}>
-              <ClaimDialog title="Faire une réclamation" content={(handleClose) => <ClaimForm onSubmit={handleClose} claim={voidClaim} />} openButton={
-                <Button sx={BUTTON}>Faire une réclamation</Button>} />
+              <ClaimDialog
+                title='Faire une réclamation'
+                content={handleClose => <ClaimForm onSubmit={handleClose} claim={voidClaim} />}
+                openButton={<Button sx={BUTTON}>Faire une réclamation</Button>}
+              />
             </Box>
           </Paper>
         </Box>

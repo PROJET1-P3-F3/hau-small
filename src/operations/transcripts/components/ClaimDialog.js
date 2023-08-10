@@ -21,9 +21,7 @@ export const ClaimDialog = ({ openButton, content, title }) => {
       {cloneElement(openButton, { onClick: handleClickOpen })}
       <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
-        <DialogContent sx={{ minWidth: '400px' }}>
-          {content(handleClose)}
-        </DialogContent>
+        <DialogContent sx={{ minWidth: '400px' }}>{content(handleClose)}</DialogContent>
       </Dialog>
     </Box>
   )

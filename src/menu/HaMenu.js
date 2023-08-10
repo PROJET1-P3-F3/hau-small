@@ -4,11 +4,11 @@ import ManagerMenu from './ManagerMenu'
 import TeacherMenu from './TeacherMenu'
 import { WhoamiRoleEnum } from '../gen/haClient'
 
-const HaMenu = (props) => {
+const HaMenu = props => {
   const role = authProvider.getCachedWhoami().role
 
   if (role === WhoamiRoleEnum.Student) {
-    return <StudentMenu {...props}/>
+    return <StudentMenu {...props} />
   }
   if (role === WhoamiRoleEnum.Manager) {
     return <ManagerMenu />
