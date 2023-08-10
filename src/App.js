@@ -50,10 +50,10 @@ const App = () => (
 
     <CustomRoutes>
       {/* transcript */}
-      <Route path='/students/:studentId/transcriptions/:transcriptId/show' element={<transcripts.show />} />
-      <Route path='/students/:studentId/transcriptions/:transcriptId/edit' element={<transcripts.edit />} />
-      <Route path='/students/:studentId/transcriptions' element={<transcripts.list />} />
-      <Route path='/students/:studentId/transcriptions/create' element={<transcripts.create />} />
+      <Route path='/students/:studentId/transcripts/:transcriptId/show' element={<transcripts.show />} />
+      <Route path='/students/:studentId/transcripts/:transcriptId/edit' element={<transcripts.edit />} />
+      <Route path='/students/:studentId/transcripts' element={<transcripts.list />} />
+      <Route path='/students/:studentId/transcripts/create' element={<transcripts.create />} />
       {/* transcript */}
 
       <Route path='/profile' element={<profile.show />} />

@@ -1,6 +1,7 @@
 import { transcriptApi } from './api'
 import { HaDataProviderType } from './HaDataProviderType'
 import { v4 as uuidV4Generator } from 'uuid'
+import { Transcript } from '../gen/haClient'
 
 const generateId = (object: { id: string } & Record<string, any>) => {
   if (!object.id) {
@@ -15,26 +16,14 @@ const haTranscriptProvider: HaDataProviderType = {
     const { data } = await transcriptApi().getStudentTranscripts(filter.studentId, page, pageSize)
     return data
   },
-  async getOne(id: string): Promise<any> {},
-  saveOrUpdate: function (resources: any): Promise<any> {
-    throw new Error('Function not implemented.')
-  }
-}
-
-export const transcriptProvider = {
-  async getOne(studentId: string, transcriptId: string, versionId: string) {
-    const { data } = await transcriptApi().getStudentTranscriptVersionPdf(studentId, transcriptId, versionId)
+  async getOne(transcriptId: string, options={}): Promise<any> {
+    const {studentId} = options
+    const {data} = await transcriptApi().getStudentTranscriptById(studentId, transcriptId)
     return data
   },
-  async getVersions(studentId: string, transcriptId: string) {
-    const { data } = await transcriptApi().getTranscriptsVersions(studentId, transcriptId)
-    return data
-  },
-  async getClaims(studentId: string, transcriptId: string, versionId: string, filter: any = {}) {
-    const {
-      pagination: { page, perPage }
-    } = filter
-    const { data } = await transcriptApi().getStudentTranscriptClaims(studentId, transcriptId, versionId, page, perPage)
+  async saveOrUpdate (resources: Transcript[]): Promise<any> {
+    console.log(resources)
+    const {data} = await transcriptApi().crudStudentTranscripts(resources[0]?.student_id || "", resources)
     return data
   }
 }

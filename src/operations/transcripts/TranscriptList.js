@@ -24,7 +24,7 @@ const TranscriptList = ({ studentId }) => {
       label='Relevé de node'
       actions={role === WhoamiRoleEnum.Manager && <Actions basePath={`/students/${definedStudentId}/transcripts`} />}
       filterDefaultValues={{ studentId: definedStudentId }}
-      sx={{ marginTop: '1rem' }}
+      sx={{ marginTop: '0.5rem' }}
       pagination={<PrevNextPagination />}
       perPage={maxPageSize}
     >

@@ -7,7 +7,6 @@ export const BUTTON = {
   paddingInline: '1.2rem',
   textTransform: 'capitalize',
   borderRadius: '5rem',
-  margin: '0.2rem'
 }
 
 const palette = {

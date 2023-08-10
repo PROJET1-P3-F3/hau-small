@@ -36,6 +36,7 @@ const ProfileShow = () => {
   return (
     <Show id={id} resource='profile' basePath='/profile' title='Mon profil'>
       <ProfileLayout />
+
     </Show>
   )
 }
