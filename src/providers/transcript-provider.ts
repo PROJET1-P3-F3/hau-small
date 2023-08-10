@@ -1,7 +1,7 @@
 import { transcriptApi } from './api'
 import { HaDataProviderType } from './HaDataProviderType'
 import { v4 as uuidV4Generator } from 'uuid'
-import { Transcript } from '../gen/haClient'
+import { StudentTranscriptClaim, Transcript } from '../gen/haClient'
 
 const generateId = (object: { id: string } & Record<string, any>) => {
   if (!object.id) {
@@ -60,9 +60,15 @@ export const transcriptClaimProvider: HaDataProviderType = {
     return data
   },
   async saveOrUpdate(_resources, options = {}) {
-    const { studentId, transcriptId, versionId, claimId } = options
+    const { studentId } = options
     const resources = generateId(_resources || {})
-    const { data } = await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, transcriptId, versionId, claimId, resources)
+    const { data } = await transcriptApi().putStudentClaimsOfTranscriptVersion(
+      studentId,
+      _resources?.transcript_id,
+      _resources.transcript_version_id,
+      _resources.id,
+      resources
+    )
     return data
   }
 }

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { List } from '@react-admin/ra-rbac'
-import { Button, CreateButton, Datagrid, EditButton, FunctionField, Link, TextField, TopToolbar } from 'react-admin'
+import { Button, CreateButton, Datagrid, FunctionField, Link, TextField, TopToolbar } from 'react-admin'
 import { Edit as EditIcon } from '@mui/icons-material'
 import { maxPageSize } from '../../providers/dataProvider'
 import authProvider from '../../providers/authProvider'

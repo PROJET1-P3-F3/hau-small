@@ -1,16 +1,55 @@
-import { Box, Button, Card, CardContent, CardHeader, Chip, IconButton, Paper, Toolbar, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, CardHeader, Chip, IconButton, Paper, Toolbar, Tooltip, Typography, DialogContentText } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PDFViewer } from '../../common/components'
 import { ClaimDialog, SelectTranscriptVersion } from './components'
 import { ASIDE, ASIDE_ACTIONS, ASIDE_CONTAINER, ASIDE_TITLE, CLAIM_ITEM, SHOW_CARD_CONTAINER, SHOW_CONTAINER } from './style'
-import { useGetList } from 'react-admin'
+import { useGetList, useNotify } from 'react-admin'
 import { BUTTON } from '../../haTheme'
 import { Edit as EditIcon } from '@mui/icons-material'
 import { ClaimForm } from './components/ClaimForm'
+import { transcriptClaimProvider } from '../../providers/transcript-provider'
 
-const ClaimStatus = ({ status }) => {
-  return <Chip color={status === 'OPEN' ? 'success' : 'danger'} label={status} />
+const ClaimStatus = ({ claim }) => {
+  const { status, reason } = claim
+  const [isLoading, setLoading] = useState(false)
+  const params = useParams()
+  const notify = useNotify()
+
+  const fetch = async () => {
+    try {
+      setLoading(true)
+      await transcriptClaimProvider.saveOrUpdate({ ...claim, status: 'CLOSED' }, { studentId: params?.studentId })
+      notify('La réclamation à été fermé avec succès.', { type: 'success' })
+    } catch {
+      notify("Une erreur s'est produite", { type: 'error' })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSubmit = f => () => {
+    fetch()
+    f && f()
+  }
+
+  return (
+    <ClaimDialog
+      title='Fermé la réclamation suivante :'
+      actions={onClose => (
+        <>
+          <Button disabled={isLoading} onClick={handleSubmit(onClose)}>
+            Oui
+          </Button>
+          <Button disabled={isLoading} onClick={onClose}>
+            Non
+          </Button>
+        </>
+      )}
+      content={() => <DialogContentText>{reason}</DialogContentText>}
+      openButton={<Chip color={status === 'OPEN' ? 'success' : 'danger'} label={status} sx={{ '&:hover': { background: 'red' }, cursor: 'pointer' }} />}
+    />
+  )
 }
 
 const formatDate = date => new Date(date).toLocaleDateString()
@@ -21,7 +60,7 @@ const ClaimItem = ({ claim = {} }) => {
     <Box sx={CLAIM_ITEM}>
       <Box>
         <Typography sx={{ marginBottom: 2 }}>{reason}</Typography>
-        <ClaimStatus status={status} />
+        <ClaimStatus claim={claim} />
       </Box>
       <Box sx={{ textAlign: 'end' }}>
         <Typography sx={{ marginBottom: 2 }}>{formatDate(creation_datetime)}</Typography>
