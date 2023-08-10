@@ -1,6 +1,6 @@
 import { Datagrid, FunctionField, TextField } from 'react-admin'
 
-export const TranscriptDatagrid = ({ studentId }) => {
+export const TranscriptDataGrid = ({ studentId }) => {
   return (
     <Datagrid bulkActionButtons={false} rowClick={id => `/students/${studentId}/transcriptions/${id}/show`}>
       <TextField source='semester' label='Semestre' />

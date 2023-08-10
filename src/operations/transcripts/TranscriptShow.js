@@ -1,8 +1,20 @@
-import { Box, Button, Card, CardContent, CardHeader, Paper, Toolbar, Typography, Chip } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Chip,
+  IconButton,
+  Paper,
+  Toolbar,
+  Tooltip,
+  Typography
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PDFViewer } from '../../common/components'
-import { SelectTranscriptVersion } from './components'
+import { ClaimDialog, SelectTranscriptVersion } from './components'
 import {
   ASIDE,
   ASIDE_ACTIONS,
@@ -14,7 +26,8 @@ import {
 } from './style'
 import { useGetList } from 'react-admin'
 import { BUTTON } from '../../haTheme'
-import { ClaimDialog } from './components'
+import { Edit as EditIcon } from '@mui/icons-material'
+import { ClaimForm } from './components/ClaimForm'
 
 const ClaimStatus = ({ status }) => {
   return <Chip color={status === 'OPEN' ? 'success' : 'danger'} label={status} />
@@ -32,7 +45,13 @@ const ClaimItem = ({ claim = {} }) => {
       </Box>
       <Box sx={{ textAlign: 'end' }}>
         <Typography sx={{ marginBottom: 2 }}>{formatDate(creation_datetime)}</Typography>
-        {status === 'OPEN' && <ClaimDialog claim={claim} />}
+        {status === 'OPEN' &&
+          <ClaimDialog content={(handleClose) => <ClaimForm onSubmit={handleClose} claim={claim} />} openButton={
+            <Tooltip title='Modifier'>
+              <IconButton size='small'>
+                <EditIcon />
+              </IconButton>
+            </Tooltip>} />}
       </Box>
     </Box>
   )
@@ -72,7 +91,8 @@ const TranscriptShow = () => {
           <PDFViewer pdf={version?.pdf} />
           <Paper elevation={1} sx={ASIDE_CONTAINER}>
             <Typography sx={ASIDE_TITLE}>Réclamations</Typography>
-            <Box sx={ASIDE}>{claimList && claimList.length > 0 && claimList.map(claim => <ClaimItem claim={claim} key={claim.id} />)}</Box>
+            <Box sx={ASIDE}>{claimList && claimList.length > 0 && claimList.map(claim => <ClaimItem claim={claim}
+                                                                                                    key={claim.id} />)}</Box>
             <Box sx={ASIDE_ACTIONS}>
               <Button sx={BUTTON}>Faire une réclamation</Button>
             </Box>

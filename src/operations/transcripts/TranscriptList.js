@@ -1,14 +1,11 @@
 import { useParams } from 'react-router-dom'
-
 import { List } from '@react-admin/ra-rbac'
 import { TopToolbar, CreateButton } from 'react-admin'
-
 import { maxPageSize } from '../../providers/dataProvider'
 import authProvider from '../../providers/authProvider'
-
 import { WhoamiRoleEnum } from '../../gen/haClient'
-import { TranscriptDatagrid } from './utils'
-import { PrevNextPagination } from '../utils/PrevNextPagination'
+import { PrevNextPagination } from '../utils'
+import { TranscriptDataGrid } from './components'
 
 const Actions = ({ basePath, resource }) => (
   <TopToolbar disableGutters>
@@ -31,7 +28,7 @@ const TranscriptList = ({ studentId }) => {
       pagination={<PrevNextPagination />}
       perPage={maxPageSize}
     >
-      <TranscriptDatagrid studentId={definedStudentId} />
+      <TranscriptDataGrid studentId={definedStudentId} />
     </List>
   )
 }
