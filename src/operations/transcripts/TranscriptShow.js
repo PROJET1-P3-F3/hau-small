@@ -6,7 +6,7 @@ import { ClaimDialog, SelectTranscriptVersion } from './components'
 import { ASIDE, ASIDE_ACTIONS, ASIDE_CONTAINER, ASIDE_TITLE, CLAIM_ITEM, SHOW_CARD_CONTAINER, SHOW_CONTAINER } from './style'
 import { useGetList, useNotify } from 'react-admin'
 import { BUTTON } from '../../haTheme'
-import { Edit as EditIcon } from '@mui/icons-material'
+import { Edit as EditIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
 import { ClaimForm } from './components/ClaimForm'
 import { transcriptClaimProvider } from '../../providers/transcript-provider'
 
@@ -117,6 +117,11 @@ const TranscriptShow = () => {
         action={
           <Toolbar>
             <SelectTranscriptVersion selected={version} idStudent={studentId} idTranscript={transcriptId} onChange={setVersion} />
+            <Tooltip sx={{ marginInline: '1rem' }} title='Ajouter une version'>
+              <IconButton>
+                <AddCircleIcon />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         }
       />
